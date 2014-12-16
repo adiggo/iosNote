@@ -1,0 +1,11 @@
+SpeechKit framework is a high-level framework. --> speech recognizer, and text to speech
+1. audio component, manage for recording 
+2. networking component --> manage network
+3. end-of-speech detector ---> when user stop speaking, and automatically stops recording.
+4. encoding component --> streaming audio's compression.
+
+Speech kit follows a server-based architecture
+voice recognition --> SKRecognizer
+convert text to speech ----> SKVocalizer. 
+
+  

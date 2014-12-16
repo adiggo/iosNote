@@ -1,0 +1,10 @@
+@try
+@catch()
+@finally
+@throw
+
+thougth we can throw exception other than NSException, cocoa framework might only catch NSEception objects for some conditions.
+
+One way to handle exception is to "promote" them to an error message. 
+convert to NSError object. 
+

@@ -1,0 +1,7 @@
+viewDidLoad --> life cycle only called once
+
+viewWillAppear --> view disppear multiple times
+
+stringWithFormat ---> @ "%@" --> this denote replace by any object
+
+

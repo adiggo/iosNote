@@ -1,0 +1,181 @@
+@readonly --> we don't want to anybody change it. So sometimes publicly, set as readonly, but privately set as readwrite,so that game logic can set the score.
+
+most of the ime, create objects by using alloc and init
+NSMutableArray *cards = [[NSMutableArray alloc] init];
+
+Or with class methods.
+
+(id)mutableCopy--> create a new object by copying the old object
+
+ sending message t nil is okay. Node executed.
+ int i = [obj method] --> if obj is nil, then i is 0. no code execute.
+If return type is C Struct, then the returned type is un-defined
+
+Dynamic Binding --> id means "pointer to an object of unknown/unspecified"
+we use mostly static typing.
+compiler knows in compile time.
+So decrease the dynamic-typing (id) --> checking type
+
+ compiler will not complain about assignment between an id and a statically typed variable.
+ never use id*, id is already a pointer
+
+ @interface Vehicle
+ -(void) move;
+ @end
+
+ @interface Ship: Vehicle
+ - (void) shoot;
+ @end
+
+ Ship *s = Ship alloc init;
+ s shoot, s move
+
+ Vehicle *v = s;
+ v shoot --> cause a compiler error, but in run time it is fine.
+
+ id obj = ...;
+obj shoot  --> no matter what obj is, compiler won't warn you. Since they are not sure it is wrong. If it is not a ship, it will crash.
+
+ NSString *hello = @"hello"
+ Vehicle *hellpship = (Vehicle *) hello;   --> casting is dangerous, cause confuse to the compiler.
+
+ When do we use id --> in java, compiler let you tell what is in array
+ Protect against id--> 1. Introspection: ask at run time what class an object is or what message can be sent to
+                    2   . Protocols: a syntax is in between id and static typing.
+                     
+Introspection -->
+1. isKindOfClass --> return whether an object is that kind of class(Inheritance included)
+2. isMemberOfClass --> return whether an object is that kind of class (no inheritance)
+3. respondsToSelector --> return whether an object responds to a given method
+
+if (obj isKinfOfClass: NSString class){
+    do some operation
+}
+ 
+Method testing--> 
+@selector
+if (obj respondsToSelector: @selector(shoot)){
+    obj shoot
+}
+
+ array makeObjectsPerformSelector: shootSelector
+
+ in UIButton, - (void)addTarget: (id)anObject action:(SEL)action
+
+Foundation Framework:
+NSObject is the basic objects. Introspection things
+description
+- (NSString *)description is a useful method to override.
+%@
+
+Copy object --> there is an important concept to understand
+- (id)copy --> give me a immutable copy of this if possible
+- (id)mutableCopy --> give me a mutable copy of this if possible
+
+NSArray ==> immutable ==> all obecjts int  the array are held onto stringly.
+Usually created by manipulating other arrays or with @[]
+
+-(id)firstObject
+-(id) lastObject
+-(NSUInteger) count;
+-(id)objectAtInDEX:(NSUInteger) index
+
+ NSMutableArray --> mutable version of NSArray
+
+ create with alloc/init
+-(void)addObject: (id)object
+-(insertObject):(id)object atIndex:(NSUInteger)index;
+- (void) removeObjectAtIndex:(NSUInteger)inedx  
+
+for- in
+    for (NSString *string in myArray)
+
+NSNumber ---> object wrapper around primitive types.
+Create arrays --> NSNumber *n = [NSNumber numberWithInt:36];
+NSNumber *n = NSNumber numberWithInt:36
+ float f = n floatValue]
+
+ C arrays allow us to define types of variables that can hold several data items of the same kind.
+ But struct provides a way to hold different data type in the array
+
+ Define a struct --> 
+ struct[structure tag]
+ {
+     member definition;
+     
+
+ }
+ struct Books
+ {
+     char title[50];
+     char author[50];
+     char subject[100];
+ };
+ In objective c, C structs is non-object, non-primitive data types.
+
+ NSData  --> used to save/restore/transmit raw data throughout the ios SDK
+
+ NSDate --> used to find out the time right now.
+ NSSet / NSMutableSet
+ --> whether something is in set
+
+ NSOrderedSet/NSMutableOrderSet
+ --> hashed, better for search
+
+ NSDictionary
+ --> Immutable collections of objects looked up by a key
+ @{key1: value1, key2:value2}
+ Strings are good keys in NSDictionary
+
+NSMutableDictionary --> mutable version of Dictionary
+
+for- in --> loop from keys in Dictionary
+
+-(id) objectForKey : (id)key
+
+Property list --> means a collection of collections
+means any graph of objects containing only --> NSArray, NSDictionary, NSNumber, NSString, NSDate, NSData
+why --> SDK has a number of methods which operate on Property lists.
+
+NSUserDefaults --> lighweight storage of Property lists
+NSDictionary persists between lauches of app
+only store small things like user preference
+standardUserDefaults
+
+typedef struct{
+    NSUInteger location;
+    NSUInteger length;
+    }NSRange;
+
+UIColor-->
+an object represent a color
+Initializer for creating a color based on RGB, HSB and even a pattern (UIImage)
+
+UIFont --> in IOS 7, very important. 
+
+[UIColor greenColor]
+UIColor lightTextColor
+
+Fonts --> when display user contents--> UIFont *font = [UIFont preferredFontForTextStyle: UIFontTextStypleBody];
+UIFontTextStyleHeadline
++(UIFont *)systemFontOfSize: (CGFloat)size
+
+UIFontDescriptor  ---> fonts are designed by artists.
+
+How text looks in screen --> not only font, underlined, how string of the edge
+Use NSAttributedString --> as a NSString where each character has a NSDictionary of "attributes" --> things like font, color, underlining.
+
+-(NSDictioanry *)attributesAtIndex: (NSUInteger) index
+                effectiveRange: (NSRangePointer) range;
+                
+NSAttributedString *attributedString = ..;
+NSString *substring = ..;
+NSRange r = [[attributedString string] rangeOfString: substring];
+ 
+NSMutableAttributeString
+(void)addAttributes: (NSDictionary *)attributes range: (NSRange) range
+
+@{} --> inside is a dictionary
+
+NSStrokeWidthAttrubuteName: @-5
+

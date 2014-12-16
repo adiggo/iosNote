@@ -1,0 +1,73 @@
+cocoa touch(multi-touch, view hierarchy, localization, controls, core motion) --> media 
+-->  core service(file access, sqlite, networking)----> os(unix kernel, BSD based, bonjourm, most api is C)
+
+Foundation UIKit, Core Data, Map Kit.
+MCV --> how to divide classes. model view controller
+model is what your program. Like card game, the card and deck is model.
+How card display in screen is the job of controller. The controller is controlling how model show in screen.
+
+View is generic. Model is independent from UI work.
+controller to model, controller to view.
+controller to view is outlet --> how controller control view
+view cannot know anything for controller. Target action --> 
+protocal is a blind communication.
+
+radio station --> notification---> model say data change, controller get notification --> model talks to controller
+
+mvc hierarchcy
+
+objective c is a super set of C
+Perperty --> a property is just the combination of a getter and setter method in a class --> this is how objective c access 
+import the framework --> highly pre-compiled.
+
+#import <Foundation/Foundation.h>
+@interface Card: NSObject
+this is a interface, which means it is a public API
+
+#import "Card,h"
+@interface Card()
+@end
+@implementation Card
+
+In Objective C, all objects live in heap --> where free location
+strong --> keep memory as long as any strong pointer --> reference counting.
+weak--> keep it in memory until no strong points to it, and set it to NIL
+
+- is a method declaration
+- (NSString *) ---> return a pointer to string
+
+@synthesize contents = _contents
+
+- (NSString *) contents
+{
+    return _contents;
+}
+- (void)setContents: (NSString *) contents
+{
+    _contents = contents;
+}
+
+BOOL --> always has nonatomic property
+@property (nonatomic) BOOL matched;
+
+we can rename the getter or setter in the header file's property declare
+we only use . when we get property
+mostly we use []. 
+
+- is the object method, + is the static method
+//same instacetype of the we set
+- (instancetype) init
+{
+    self = [super init];   //weired part, calling super class initialize.
+    if (self){
+        
+
+    }
+    return self;
+}
+
+
+IBAction --> it means void typedef.
+option key we can see documentation in xcode
+
+

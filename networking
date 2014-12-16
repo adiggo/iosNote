@@ -1,0 +1,48 @@
+ios7, apple use NSURLSession as the new method of networking .
+1. background uploads and downloads
+2. able to pause or resume networking operation
+3. configure container--> set http header option, we just need to do it once and each request in the session will have the same config
+4. subclassable and private storage: NSURLSession is the subclassable and cna configure a session to use private storage on per session?
+5. imporved authentication handling
+
+
+NSString * url = @"url";    
+NSURLRequest *request = [NSURKRequest requestWithURL: [NSURL URLWithString: url]];// request
+[NSURLConnection sendAsynchronousRequest:request
+                queue: [NSOperationQueue mainQueue]
+                completionHandler: ^(NSURLResponse *response,
+                                    NSData *data,
+                                    NSError *connectionError){
+}];
+
+for NSURLSession:
+
+NSURLSession *session = [NSURLSession sharedSession];
+[[session dataTaskWithURL: [NSURL URLWithString: l]
+        completionHandler:^(NSData data,
+                        NSURLRResponse * response,
+                        NSError *erro){
+            
+        }] resume];
+
+for AFNetworking:
+
+NSURLRequest *request = [NSURLRequest requestWithURL:
+                        [NSURL URLWithString: l]];
+AFJSONRequestOperation *operation = 
+[AFJSONRequestOperation JSONRequestOperationWithRequest:request
+    success:^(NSURLRequest *request,
+                  NSHTTPURLResponse *response,
+                                id JSON) {
+            // handle response
+    } failure:nil];
+    [operation start];
+
+benefits of using AFNetworking is the data type classes for handling response data. 
+use afjson, the success part is already parsed the response and return the data for you.
+
+
+
+AFnetowrking is build on top of NSURLSession, automatic serialization
+
+
